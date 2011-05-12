@@ -18,10 +18,10 @@
 
 		private static $_instance = null;
 		
-		const HOST = 'localhost';
-		const USER = 'root';
-		const PASS = 'mysqlgerty';
-		const DB   = 'pacomputer';
+		const HOST = '';
+		const USER = '';
+		const PASS = '';
+		const DB   = '';
 		
 		private $_bdLink = null;
 		private $_type = null;
