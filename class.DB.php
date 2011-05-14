@@ -3,22 +3,23 @@
 	 * Clase modelo para MySQL usando las funciones mysql_* de php
 	 * 
 	 * @author		Héctor Laura
-	 * @version		0.52
+	 * @version		0.5.2.1
 	 * 
 	 */
 	 class DB{
 
 		private static $_instance = null;
-		
-		const HOST = '';
-		const USER = '';
-		const PASS = '';
-		const DB   = '';
+
+		const HOST = HOST;
+		const USER = USER;
+		const PASS = PASS;
+		const DB   = _DB_;
 		
 		private $_bdLink = null;
 		private $_type = null;
 		private $_tables = array();
 		private $_fields = array();
+		private $_values = array();
 		private $_join = array();
 		private $_where = array();		
 		private $_group = array();
@@ -29,7 +30,6 @@
 		private $_keys = array();
 		private $_tail = null;
 		private $_debug = false;
-
 
 		/**
 		 * Conecta con la base de datos y devuelve
@@ -959,5 +959,25 @@
 			return implode(' ', $this->_sql);
 
 		}//fin do_debug_insert
+
+
+		/**
+		 * Setter para inicializar atributos
+		 */
+		public function __set($var, $val){
+
+			$this->data[$var] = $val;
+
+		}//fin __set
+
+
+		/**
+		 * Getter para sacar los valores de atributos
+		 */
+		public function __get($var){
+
+			return $this->data[$var];
+
+		}//fin __get
 
 	}//fin MODELO

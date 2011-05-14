@@ -1,5 +1,8 @@
 CHANGELOG
 
+0.5.2.1
+	agregada la propiedad "$_values". Antes no estaba.
+
 0.52
 	nuevo método "get_uid"
 0.51
