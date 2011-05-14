@@ -1,0 +1,10 @@
+CHANGELOG
+
+0.52
+	nuevo método "get_uid"
+0.51
+	nuevo método "last_id"
+
+0.5
+	Cuando al método "tables" se le pasa una única tabla,
+	no es necesario pasar un array

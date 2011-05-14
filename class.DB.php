@@ -3,18 +3,10 @@
 	 * Clase modelo para MySQL usando las funciones mysql_* de php
 	 * 
 	 * @author		Héctor Laura
-	 * @version		0.51
-	 * 
-	 * changelog
-	 * 
-	 * 0.51
-	 * 	nuevo método "last_id"
-	 * 
-	 * 0.5
-	 * 	ya no hace falta pasar un array con las tablas cuando sólo es una
+	 * @version		0.52
 	 * 
 	 */
-	 class DBa{
+	 class DB{
 
 		private static $_instance = null;
 		
@@ -815,6 +807,21 @@
 			return mysql_real_escape_string($var, $this->_bdLink);
 
 		}//fin escape
+
+		
+		/**
+		 * Genera un identificador único
+		 * 
+		 * @param		string	$prefix		Prefijo del identificadro
+		 * 
+		 * @return	string	El identificador único
+		 */
+		public function get_uid($prefix = null){
+
+			return $prefix . md5(uniqid(mt_rand(), true));
+
+		}//fin get_uid
+
 
 
 		/**
