@@ -14,7 +14,7 @@
 	 * 	ya no hace falta pasar un array con las tablas cuando sólo es una
 	 * 
 	 */
-	 class DB{
+	 class DBa{
 
 		private static $_instance = null;
 		
