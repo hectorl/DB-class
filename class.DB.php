@@ -3,17 +3,19 @@
 	 * Clase modelo para MySQL usando las funciones mysql_* de php
 	 * 
 	 * @author		Héctor Laura
-	 * @version		0.5.2.1
+	 * @version		0.5.3.0
 	 * 
 	 */
 	 class DB{
 
-		private static $_instance = null;
+		const VERSION = '0.5.3.0';
 
 		const HOST = HOST;
 		const USER = USER;
 		const PASS = PASS;
 		const DB   = _DB_;
+
+		private static $_instance = null;
 		
 		private $_bdLink = null;
 		private $_type = null;
@@ -835,7 +837,9 @@
 
 
 		/**
+		 * Muestra un pop up con la sql
 		 * 
+		 * http://www.quirksmode.org/js/popup.html
 		 */
 		public function do_debug($debug_ajax){
 
@@ -869,8 +873,30 @@
 			}else{
 
 				echo '<script type="text/javascript">
+						
+						var exists = (typeof(debug) == "undefined") ? false : true;
+
 						debug = window.open("","DB_Debug","width=400,height=200,resizable,scrollbars=yes,titlebar=1,top=600,left=1500");
-						debug.document.write("<div style=\"font-size:10px; font-family:sans-serif\"><h1>SQL debug</h1>' . str_replace('"', '&quot', $info) . '</div>");							
+						var tmp = debug.document;
+
+						if(!exists){
+
+							//Cerramos para que al recargar, escriba de nuevo y no a continuación
+							tmp.close();
+
+							tmp.write("<html style=\"padding:0; margin:0\">");
+							tmp.write("<head><title>SQL Debug. Version ' . self::VERSION . '</title></head>");
+							tmp.write("<body style=\"background-color:#333; padding:0; margin:0\">");
+							tmp.write("<h1 style=\"background-color:#000; color:#999; padding:3px 5px; font:12px sans-serif\">SQL DEBUG <small style=\"float:right\">v. ' . self::VERSION . '</small></h1>");
+
+						}//fin if
+
+						if(exists) tmp.write("<hr style=\"margin:10px 0\" />");
+
+						tmp.write("<div style=\"color:#DDD; font-size:12px; font-family:monospace; margin:0; padding:0 10px\">' . str_replace('"', '&quot', $info) . '</div>");
+
+						if(!exists) tmp.write("</body></html>");
+						
 					</script>';
 
 			}//fin else		 

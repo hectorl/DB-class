@@ -14,7 +14,13 @@
 	$db->fields();
 
 	$res = $db->execute(true);
-	
+
 	echo '<pre>';
 	var_dump($res);
 	echo '</pre>';
+
+	$db->select();
+	$db->tables('articles');
+	$db->fields();
+
+	$res = $db->execute(true);
