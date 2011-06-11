@@ -3,17 +3,17 @@
 	 * Clase modelo para MySQL usando las funciones mysql_* de php
 	 * 
 	 * @author		Héctor Laura
-	 * @version		0.5.3.0
+	 * @version		0.5.4.0
 	 * 
 	 */
 	 class DB{
 
-		const VERSION = '0.5.3.0';
+		const VERSION = '0.5.4.0';
 
-		const HOST = HOST;
-		const USER = USER;
-		const PASS = PASS;
-		const DB   = _DB_;
+		const HOST = DB_HOST;
+		const USER = DB_USER;
+		const PASS = DB_PASS;
+		const DB   = DB_DB;
 
 		private static $_instance = null;
 		
@@ -776,7 +776,7 @@
 			return mysql_query($this->_sql) ? true : false;
 
 		}//fin do_prepare
-		
+
 
 		/**
 		 * Comprueba si la conexión es correcta
@@ -852,6 +852,8 @@
 				case 'INSERT': $info = $this->do_insert_debug($debug_ajax);
 					break;
 				case 'UPDATE': $info = $this->do_update_debug($debug_ajax);
+					break;
+				case 'SHOW': $info = $this->do_show_debug($debug_ajax);
 					break;
 				/*
 				case 'DELETE': $info = $this->do_delete_debug($debug);
@@ -988,6 +990,37 @@
 
 
 		/**
+		 * 
+		 */
+		private function do_show_debug(){
+
+			$this->_sql[] = '<b>SHOW</b>';
+			$this->_sql[] = implode(', ', $this->_fields);
+			$this->_sql[] = '<b>FROM</b>';
+			
+			if(sizeof($this->_tables) > 0){
+
+				$this->_sql[] = implode(' ', $this->_tables);
+
+			}else{
+
+				$this->_sql[] = self::DB;
+
+			}//fin else
+
+			if(sizeof($this->_where) > 0){
+
+				$this->_sql[] = '<b>WHERE</b>';
+				$this->_sql[] = implode(' ', $this->_where);
+
+			}//fin if
+
+			return implode(' ', $this->_sql);
+
+		}//fin do_show
+
+
+		/**
 		 * Setter para inicializar atributos
 		 */
 		public function __set($var, $val){
@@ -1006,4 +1039,4 @@
 
 		}//fin __get
 
-	}//fin MODELO
+	}//fin DB
