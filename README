@@ -1,5 +1,8 @@
 CHANGELOG
 
+0.5.4.1
+	el método "do_show" muestra un array númerico en caso de hacer "SHOW TABLES"
+
 0.5.4.0
 	nuevo método "do_show_debug"
 

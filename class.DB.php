@@ -3,12 +3,12 @@
 	 * Clase modelo para MySQL usando las funciones mysql_* de php
 	 * 
 	 * @author		Héctor Laura
-	 * @version		0.5.4.0
+	 * @version		0.5.4.1
 	 * 
 	 */
 	 class DB{
 
-		const VERSION = '0.5.4.0';
+		const VERSION = '0.5.4.1';
 
 		const HOST = DB_HOST;
 		const USER = DB_USER;
@@ -728,17 +728,31 @@
 
 			$result = mysql_query($sql) or die(mysql_error());
 
-			while($fetch = mysql_fetch_assoc($result)){
+			$rows = array();
 
-				while(list($field, $val) = each($fetch)){			    
+			if($this->_fields[0] == 'TABLES'){
 
-					$row[$field] = $val;		
+				while($row = mysql_fetch_array($result, MYSQL_NUM)) {
+
+				    $rows[] = $row[0];
 
 				}//fin while
 
-				$rows[] = $row;
+			}else{
 
-			}//fin while
+				while($fetch = mysql_fetch_assoc($result)){
+	
+					while(list($field, $val) = each($fetch)){			    
+	
+						$row[$field] = $val;		
+	
+					}//fin while
+	
+					$rows[] = $row;
+	
+				}//fin while
+
+			}//fin else
 
 			return $rows;
 
@@ -1039,4 +1053,4 @@
 
 		}//fin __get
 
-	}//fin DB
+	}//fin MODELO
